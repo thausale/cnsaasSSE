@@ -21,8 +21,14 @@ app.get("/sse", (req, res) => {
 
   clients.push(res);
 
+  const heartbeatInterval = setInterval(() => {
+    res.write(":heartbeat\n\n");
+  }, 25000);
+
   // Close the SSE connection when the client disconnects
   req.on("close", () => {
+    clearInterval(heartbeatInterval);
+
     clients = clients.filter((client) => client !== res);
   });
 });
