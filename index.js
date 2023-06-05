@@ -16,6 +16,8 @@ app.get("/sse", (req, res) => {
   res.setHeader("Content-Type", "text/event-stream");
   res.setHeader("Cache-Control", "no-cache");
   res.setHeader("Connection", "keep-alive");
+  // TODO: replace with frontend url
+  res.setHeader("Access-Control-Allow-Origin", "*"); // Replace with your actual front-end URL
 
   clients.push(res);
 
